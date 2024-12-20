@@ -66,16 +66,16 @@ const Properties = () => {
     return (
         <>
             <div style={{ width: '100%' }} className='pb-6'>
-                <div className=''>
+                <div style={{ width: '100%' }}>
                     <div style={{ height: '30px', zIndex: 10, top: 0, width: '100%', textAlign: 'center' }} className='header-fixed py-8'>
                         <img src={propsoch} />
                     </div>
-                        <div className='justify-between grid-container mt-20'>{data?.data?.map((e, index) => {
-                            return <div style={{ width: '286px', paddingLeft:'20px', paddingRight:'20px' }} className='relative cursor-pointer pb-6'>
+                        <div style={{width:'100%'}} className='justify-between grid-container mt-20'>{data?.data?.map((e, index) => {
+                            return <div style={{ maxWidth: '300px', width:'100%', paddingLeft:'20px', paddingRight:'20px' }} className='relative cursor-pointer pb-6'>
 
                                 <Slider {...settings} className='scroll-container slider-container'>
                                     {e?.images?.map((image) => {
-                                        return <img alt="img" width={'256px'} height={'100%'} src={image} className='' />
+                                        return <img alt="img" height={'100%'} src={image} className='' />
                                     })}
                                 </Slider>
 
