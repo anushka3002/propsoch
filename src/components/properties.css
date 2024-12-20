@@ -49,6 +49,7 @@
     z-index: 20;
     background-color: white;
     text-align: center;
+    display: none;
 }
 
 .mt-20 {
@@ -239,11 +240,19 @@ place-items: center;
 .grid-container {
     grid-template-columns: repeat(3, 1fr);
 }
+
+.footer-fixed{
+    display: block;
+}
 }
 
 @media (max-width: 480px) {
 .grid-container {
     grid-template-columns: repeat(2, 1fr);
+}
+
+.footer-fixed{
+    display: block;
 }
 }
 
