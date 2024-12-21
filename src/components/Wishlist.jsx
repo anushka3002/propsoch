@@ -17,9 +17,9 @@ import { CustomNextArrow, CustomPrevArrow } from './commonComponent'
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
-const Properties = () => {
+const Wishlist = () => {
 
-    const { data } = useSelector(state => state.data)
+    const data = JSON.parse(localStorage.getItem('wishlist')) || []
     const [liked, setLiked] = useState([])
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -42,11 +42,7 @@ const Properties = () => {
 
     const handleWishlist = (item) => {
         let existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
-        if (existingWishlist.some(existingItem => existingItem._id === item._id)) {
-            existingWishlist = existingWishlist.filter(existingItem => existingItem._id !== item._id);
-        } else {
-            existingWishlist.push(item);
-        }
+        existingWishlist = existingWishlist?.filter(existingItem => existingItem._id !== item._id);
         localStorage.setItem('wishlist', JSON.stringify(existingWishlist));
     };
 
@@ -57,7 +53,7 @@ const Properties = () => {
                     <div style={{ height: '20px', width: '100%', textAlign: 'center', zIndex: 10, top: 0 }} className='header-fixed py-6'>
                         <img src={propsoch} />
                     </div>
-                    <div style={{ width: '100%' }} className='justify-between grid-container pb-12 mt-8'>{data?.data?.length > 0 ? data?.data?.map((e, index) => {
+                    <div style={{ width: '100%' }} className='justify-between grid-container pb-12 mt-8'>{data?.length > 0 ? data?.map((e, index) => {
                         return <div style={{ width: '256px', paddingLeft: '20px', paddingRight: '20px', outline: 'none', userSelect: 'none' }} className='relative cursor-pointer pb-6'>
                             <Slider {...settings} className='scroll-container slider-container rounded-8'>
                                 {e?.images?.map((image) => {
@@ -66,7 +62,7 @@ const Properties = () => {
                             </Slider>
                             {e.typeOfRental != 'superhost' && <div style={{ top: 10, left: 30 }} className='mostLiked'>Most liked</div>}
                             <div style={{ position: 'absolute', top: 10, right: 30 }}>
-                                <img style={{ outline: 'none', userSelect: 'none' }} alt="img" onClick={(el) => { handleWishlist(e); el.stopPropagation(); liked.includes(index) ? setLiked(liked.filter((el) => el !== index)) : setLiked([...liked, index]) }} width={'30px'} src={liked.includes(index) ? pinkHeart : heart} />
+                                <img style={{ outline: 'none', userSelect: 'none' }} alt="img" onClick={(el) => { handleWishlist(e); el.stopPropagation(); liked.includes(index) ? setLiked(liked.filter((el) => el !== index)) : setLiked([...liked, index]) }} width={'30px'} src={liked.includes(index) ? heart : pinkHeart} />
                             </div>
                             <div className='flex justify-between items-end pt-2'>
                                 <div className='flex my-auto'>
@@ -82,17 +78,18 @@ const Properties = () => {
                             <p className='date my-auto pt-1'>Apr 4 - 12</p>
                         </div>
                     }) : <div className='title'
-                    style={{
-                        width: '100vw',
-                        height: '90vh',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        textAlign: 'center',
-                    }}
-                >
-                    Loading data...
-                </div>}
+                        style={{
+                            width: '100vw',
+                            height: '90vh',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            textAlign: 'center',
+                        }}
+                    >
+                        No data in wishlist
+                    </div>
+                    }
                     </div>
                 </div>
             </div>
@@ -101,4 +98,4 @@ const Properties = () => {
     )
 }
 
-export default Properties;
+export default Wishlist;

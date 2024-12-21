@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleData } from '../Actions/action'
 import { useParams } from 'react-router'
@@ -15,13 +15,13 @@ const PropertyDetails = () => {
     const dispatch = useDispatch()
     const { id } = useParams()
     const { details } = useSelector(state => state.details)
+    const [text, setText] = useState(false)
 
     useEffect(() => {
         dispatch(getSingleData(id))
     }, [id])
 
     const truncateText = (text, maxLength) => {
-        console.log(text, 'text')
         if (text?.length <= maxLength) {
             return text;
         }
@@ -42,10 +42,10 @@ const PropertyDetails = () => {
 
     return (
         <>
-            <div style={{ height: '20px', width: '100%', textAlign: 'center' }} className='pt-3 pb-8'>
+            <div style={{ height: '20px', width: '100%', textAlign: 'center', zIndex:10, top:0 }} className='header-fixed py-4'>
                 <img src={propsoch} />
             </div>
-            <div className='mx-6 pt-2 pb-12'>
+            <div className='mx-6 pt-2 pb-12 mt-6'>
                 <div className='relative'>
                 <Slider {...settings} className='scroll-container slider-container rounded-4'>
                     {details?.data?.images?.map((image) => {
@@ -54,8 +54,8 @@ const PropertyDetails = () => {
                 </Slider>
                 {details?.data?.typeOfRental != 'superhost' && <div style={{ top: 10, left: 10 }} className='mostLiked'>Most liked</div>}
                 </div>
-                <div style={{ textAlign: 'center' }} className='flex justify-between pt-6'>
-                    <p className='title my-auto'>{truncateText(details?.data?.name, 20)}</p>
+                <div className='flex justify-between pt-6'>
+                    <p onClick={()=>setText(!text)} className='title my-auto cursor-pointer'>{text ? details?.data?.name : truncateText(details?.data?.name, 20)}</p>
                     <p className='title my-auto'>5.2 Cr</p>
                 </div>
                 <div className='flex justify-between my-auto subTitle'>
@@ -72,7 +72,7 @@ const PropertyDetails = () => {
                     </div>
                     <p className='my-auto address pl-4'>Jl. Gerungsari, Bulusan, Kec. Tembalang, Kota Semarang, Jawa Tengah 50277</p>
                 </div>
-                <MapComponent />
+                <MapComponent location={details?.data?.location}/>
                 <div className='flex pt-2 nowrap'>
                     <p className='amenitiesTile'>2 Hospitals</p>
                     <p className='amenitiesTile ml-4'>4 Gas stations</p>
