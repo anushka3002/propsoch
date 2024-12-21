@@ -6,23 +6,23 @@ import login from '../images/login.png'
 
 const Footer = () => {
     return (
-        <div style={{ bottom: 0, width: '100%' }} className='py-8 footer-fixed'>
+        <div style={{ bottom: -1, left:0, width: '100%', zIndex:20 }} className='py-4 footer-fixed'>
             <div className='flex justify-between px-10'>
                 <div>
-                    <img className='mx-auto' width={'30px'} src={explore} />
-                    <p className='my-auto'>Explore</p>
+                    <img className='mx-auto' width={'26px'} src={explore} />
+                    <p className='my-auto text-14 pt-1'>Explore</p>
                 </div>
                 <div>
-                    <img width={'30px'} src={wishlists} />
-                    <p className='my-auto'>Wishlists</p>
+                    <img width={'26px'} src={wishlists} />
+                    <p className='my-auto text-14 pt-1'>Wishlists</p>
                 </div>
                 <div>
-                    <img width={'30px'} src={map} />
-                    <p className='my-auto'>Show map</p>
+                    <img width={'26px'} src={map} />
+                    <p className='my-auto text-14 pt-1'>Show map</p>
                 </div>
                 <div>
-                    <img width={'30px'} src={login} />
-                    <p className='my-auto'>Log in</p>
+                    <img width={'26px'} src={login} />
+                    <p className='my-auto text-14 pt-1'>Log in</p>
                 </div>
             </div>
         </div>
