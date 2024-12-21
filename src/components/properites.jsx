@@ -77,7 +77,10 @@ const Properties = () => {
                         }}
                     >
                         {data?.data?.length > 0 ? (
-                            data?.data?.map((e, index) => (
+                            data?.data?.map((e, index) => {
+                                const randomViews = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+                                const randomRating = (Math.random() * (5 - 3) + 3).toFixed(1)
+                                return(
                                 <div
                                     key={e._id}
                                     style={{
@@ -125,18 +128,18 @@ const Properties = () => {
                                     <div className='flex justify-between items-end pt-2'>
                                         <div className='flex my-auto'>
                                             <img className='' width={'20px'} height={'20px'} src={eye} />
-                                            <span className='ml-2'>8,213</span>
+                                            <span className='ml-2'>{randomViews}</span>
                                         </div>
                                         <div className='flex my-auto'>
-                                            <img width={'20px'} height={'20px'} src={orangeStar} />
-                                            <span className='ml-2'>3.2</span>
+                                            <img width={'20px'} height={'20px'} src={randomRating > 5 ? greenStar : orangeStar} />
+                                            <span className='ml-2 mt-2'>{randomRating}</span>
                                         </div>
                                     </div>
 
                                     <p className='location my-auto pt-2'>{e.location}</p>
                                     <p className='date my-auto pt-1'>Apr 4 - 12</p>
-                                </div>
-                            ))
+                                </div>)
+})
                         ) : (
                             <div
                                 className='title'
