@@ -19,6 +19,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 const Properties = () => {
 
     const { data } = useSelector(state => state.data)
+    let existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
     const [liked, setLiked] = useState([])
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -40,7 +41,6 @@ const Properties = () => {
     };
 
     const handleWishlist = (item) => {
-        let existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
         if (existingWishlist.some(existingItem => existingItem._id === item._id)) {
             existingWishlist = existingWishlist.filter(existingItem => existingItem._id !== item._id);
         } else {
@@ -48,6 +48,11 @@ const Properties = () => {
         }
         localStorage.setItem('wishlist', JSON.stringify(existingWishlist));
     };
+
+    const isItemInWishlist = (item) => {
+        const existingWishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+        return existingWishlist.some(existingItem => existingItem._id === item._id);
+      };
 
     return (
         <>
@@ -121,7 +126,7 @@ const Properties = () => {
                                                     : setLiked([...liked, index]);
                                             }}
                                             width={'30px'}
-                                            src={liked.includes(index) ? pinkHeart : heart}
+                                            src={isItemInWishlist(e) ? pinkHeart : heart}
                                         />
                                     </div>
 
