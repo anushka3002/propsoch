@@ -83,8 +83,6 @@ const Properties = () => {
                     >
                         {data?.data?.length > 0 ? (
                             data?.data?.map((e, index) => {
-                                const randomViews = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
-                                const randomRating = (Math.random() * (5 - 3) + 3).toFixed(1)
                                 return(
                                 <div
                                     key={e._id}
@@ -133,11 +131,11 @@ const Properties = () => {
                                     <div className='flex justify-between items-end pt-2'>
                                         <div className='flex my-auto'>
                                             <img className='' width={'20px'} height={'20px'} src={eye} />
-                                            <span className='ml-2'>{randomViews}</span>
+                                            <span className='ml-2'>{e.views}</span>
                                         </div>
                                         <div className='flex my-auto'>
-                                            <img width={'20px'} height={'20px'} src={randomRating > 5 ? greenStar : orangeStar} />
-                                            <span className='ml-2 mt-2'>{randomRating}</span>
+                                            <img width={'20px'} height={'20px'} src={e.ratings == 5.0 ? greenStar : orangeStar} />
+                                            <span className='ml-2 mt-2'>{e.ratings == 5 ? '5.0' : e.ratings}</span>
                                         </div>
                                     </div>
 
